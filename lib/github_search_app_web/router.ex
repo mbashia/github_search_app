@@ -18,6 +18,7 @@ defmodule GithubSearchAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live"/search/github", SearchLive.Index
   end
 
   # Other scopes may use custom stacks.
