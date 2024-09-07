@@ -5,11 +5,11 @@
       <%= @title %>
     </.header>
 
-    <.simple_form for={@form} id="search-form" phx-change="validate" phx-submit="save">
+    <.simple_form for={@form} id="search-form" phx-change="validate" phx-submit="search">
       <.input field={@form[:search]} type="text" label="" />
 
       <:actions>
-        <.button phx-disable-with="Saving...">Search</.button>
+        <.button phx-disable-with="Searching...">Search</.button>
       </:actions>
     </.simple_form>
 
