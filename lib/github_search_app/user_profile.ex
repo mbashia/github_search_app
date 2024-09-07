@@ -1,18 +1,16 @@
 defmodule GithubSearchApp.UserProfile do
-  defstruct [
-    :avatar_url,
-    :bio,
-    :blog,
-    :company,
-    :created_at,
-    :email,
-    :followers,
-    :following,
-    :location,
-    :login,
-    :name,
-    :public_repos,
-    :twitter_username,
-    :profile_url
-  ]
+  defstruct avatar_url: nil,
+            bio: nil,
+            blog: nil,
+            company: nil,
+            created_at: nil,
+            email: nil,
+            followers: nil,
+            following: nil,
+            location: nil,
+            login: nil,
+            name: nil,
+            public_repos: nil,
+            twitter_username: nil,
+            profile_url: nil
 end
