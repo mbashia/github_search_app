@@ -1,5 +1,16 @@
 <div>
+  This is the search page
+  <div>
+    <.header>
+      <%= @title %>
+    </.header>
 
+    <.simple_form for={@form} id="search-form" phx-change="validate" phx-submit="save">
+      <.input field={@form[:search]} type="text" label="" />
 
-This is the search page
+      <:actions>
+        <.button phx-disable-with="Saving...">Search</.button>
+      </:actions>
+    </.simple_form>
+  </div>
 </div>
