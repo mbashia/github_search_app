@@ -7,7 +7,7 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
     {:ok,
      socket
      |> assign(:user, default_user())
-     |> assign(:title, "dev finder")
+     |> assign(:title, "devfinder")
      |> assign_new(:form, fn ->
        to_form(%{})
      end)}
@@ -23,7 +23,8 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
   def handle_event("search", %{"search" => search}, socket) do
     IO.inspect(search)
 
-    {:ok,searched_user} = GithubApi.search_github(search)
+    {:ok, searched_user} = GithubApi.search_github(search)
+
     {:noreply,
      socket
      |> assign(:user, searched_user)}
@@ -56,6 +57,14 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
     end)
     |> Enum.into(%{})
     |> struct(GithubSearchApp.UserProfile)
+  end
+
+  defp format_date(date) do
+    {:ok, utc_time, _int} = DateTime.from_iso8601(date)
+
+    utc_time
+    |> DateTime.to_date()
+    |> Timex.format!("{D} {Mshort} {YYYY}")
   end
 
   defp check_field(nil), do: "Not filled"
