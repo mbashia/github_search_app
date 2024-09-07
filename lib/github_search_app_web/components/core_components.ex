@@ -439,7 +439,7 @@ defmodule GithubSearchAppWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center  justify-between gap-6", @class]}>
       <div>
-        <h1 class="text-lg mono-700  text-[#141D2F]  text-2xl leading-8 ">
+        <h1 class="text-lg mono-700  text-[#2B3442]  text-3xl leading-8 ">
           <%= render_slot(@inner_block) %>
         </h1>
         <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
