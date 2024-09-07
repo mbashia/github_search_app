@@ -1,5 +1,5 @@
-<div class=" bg-[#ffffff]   h-[100vh] w-[100%] flex justify-center items-center">
-  <div class=" w-[50%]  p-4">
+<div class=" bg-[#F6F8FF]   h-[100vh] w-[100%] flex md:justify-center md:items-center">
+  <div class=" w-[100%] md:w-[45%]  p-4">
     <div class=" flex flex-row  py-6 justify-between">
       <.header>
         <%= @title %>
@@ -20,12 +20,12 @@
       </div>
     </div>
 
-    <div class="w-[100%] rounded-2xl shadow-xl mb-4  bg-[#FEFEFE]">
+    <div class="w-[100%] rounded-2xl shadow-2xl mb-8    bg-[white]">
       <.form
         for={@form}
         id="search-form"
         phx-submit="search"
-        class="w-[100%] px-2 py-2 rounded-2xl shadow-xl  flex items-center gap-2"
+        class="w-[100%] pl-4 md:pl-8 px-2 py-4 rounded-2xl shadow-2xl  flex items-center gap-2"
       >
         <div class="w-[5%]">
           <svg height="24" width="25" xmlns="http://www.w3.org/2000/svg">
@@ -35,14 +35,13 @@
             />
           </svg>
         </div>
-        <div class="w-[80%]">
+        <div class="w-[70%] md:w-[80%]">
           <.input
             field={@form[:search]}
             placeholder="Search GitHub username…"
-            class="p-0 m-0 mont-400  placeholder:text-[#4B6A9B] border-red-500 w-[85%] border dark:placeholder:text-[#FFFFFF]"
           />
         </div>
-        <div class="w-[15%]">
+        <div class="w-[25%] md:w-[15%]">
           <.button
             phx-disable-with="Searching..."
             class="w-[100%] mono-600 text-[#FFFFFF] bg-[#0079FF]"
@@ -53,24 +52,39 @@
       </.form>
     </div>
 
-    <div class="w-[100%]  shadow-xl rounded-2xl px-10 py-12 flex ">
-      <div class="w-[25%]  flex justify-center py-4">
+    <div class="w-[100%] bg-white  shadow-2xl rounded-2xl px-10 py-12 flex flex-col md:flex-row">
+      <div class="w-[100%] md:w-[25%]  flex gap-8 justify-center py-4">
         <img src={@user.avatar_url} class="w-24 h-24 rounded-full border border-[#697C9A]/20" />
+
+        <div class="md:hidden">
+          <div class=" mono-400 flex flex-col gap-2 justify-between">
+            <div class="flex flex-col">
+              <span class="text-[#2B3442]  text-xl tracking-widest mono-700">
+                <%= @user.name %>
+              </span>
+              <span class="mono-500 text-[#0079FF]">@<%= @user.name %></span>
+            </div>
+
+            <span class="mono-500 text-[#697C9A]">
+              Joined <%= format_date(@user.created_at) %>
+            </span>
+          </div>
+        </div>
       </div>
 
-      <div class="w-[75%] flex flex-col gap-4">
-        <div class=" mono-400 flex flex-row justify-between">
+      <div class="w-[100%] md:w-[75%] flex flex-col gap-10">
+        <div class=" mono-400 hidden md:flex flex-row justify-between">
           <div class="flex flex-col">
-            <span class="text-[#2B3442]  text-xl tracking-widest mono-700">
+            <span class="text-[#2B3442]  text-2xl tracking-widest mono-700">
               <%= @user.name %>
             </span>
             <span class="mono-500 text-[#0079FF]">@<%= @user.name %></span>
           </div>
 
-          <span class="mono-500 text-[#697C9A]">joined <%= format_date(@user.created_at) %></span>
+          <span class="mono-500 text-[#697C9A]">Joined <%= format_date(@user.created_at) %></span>
         </div>
 
-        <div class="flex flex-col my-4">
+        <div class="flex flex-col my-2 md:my-4">
           <p class="text-[#697C9A]  text-sm tracking-widest mono-500">
             <%= @user.bio %>
           </p>
@@ -78,22 +92,22 @@
 
         <div class=" bg-[#F6F8FF] rounded-xl px-6 py-4 flex flex-row justify-evenly">
           <div class="flex flex-col justify-center gap-1">
-            <span class="text-[#4B6A9B] mono-400">Repos</span>
-            <span class="text-[#2B3442] mono-700"><%= @user.public_repos %></span>
+            <span class="text-[#4B6A9B] mono-400 text-sm">Repos</span>
+            <span class="text-[#2B3442] mono-700 text-lg"><%= @user.public_repos %></span>
           </div>
 
           <div class="flex flex-col justify-center gap-1">
-            <span class="text-[#4B6A9B] mono-400">Followers</span>
-            <span class="text-[#2B3442] mono-700"><%= @user.followers %></span>
+            <span class="text-[#4B6A9B] mono-400 text-sm">Followers</span>
+            <span class="text-[#2B3442] mono-700 text-lg"><%= @user.followers %></span>
           </div>
 
           <div class="flex flex-col justify-center gap-1">
-            <span class="text-[#4B6A9B] mono-400">Following</span>
-            <span class="text-[#2B3442] mono-700"><%= @user.following %></span>
+            <span class="text-[#4B6A9B] mono-400 text-sm">Following</span>
+            <span class="text-[#2B3442] mono-700 text-lg"><%= @user.following %></span>
           </div>
         </div>
 
-        <div class="w-[100%] grid grid-cols-2 gap-y-6 gap-x-24  ">
+        <div class="w-[100%] grid md:grid-cols-2 gap-y-6 gap-x-24  ">
           <div class="flex gap-4 items-center">
             <div>
               <svg height="20" width="14" xmlns="http://www.w3.org/2000/svg">
