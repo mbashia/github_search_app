@@ -17,4 +17,10 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
     IO.inspect(search)
     {:noreply, socket}
   end
+
+  @impl true
+  def handle_event("search", %{"search" => search}, socket) do
+    IO.inspect(search)
+    {:noreply, socket}
+  end
 end
