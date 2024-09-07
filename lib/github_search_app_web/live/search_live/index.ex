@@ -1,5 +1,6 @@
 defmodule GithubSearchAppWeb.SearchLive.Index do
   use GithubSearchAppWeb, :live_view
+  alias GithubSearchApp.GithubApi
   @impl true
   def mount(_params, _session, socket) do
     ## djdjdjd
@@ -15,14 +16,17 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
   @impl true
 
   def handle_event("validate", %{"search" => search}, socket) do
-    IO.inspect(search)
     {:noreply, socket}
   end
 
   @impl true
   def handle_event("search", %{"search" => search}, socket) do
     IO.inspect(search)
-    {:noreply, socket}
+
+    {:ok,searched_user} = GithubApi.search_github(search)
+    {:noreply,
+     socket
+     |> assign(:user, searched_user)}
   end
 
   def default_user() do
@@ -43,4 +47,17 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
       profile_url: "https://github.com/mbashia"
     }
   end
+
+  def process_user_struct({:ok, struct}) do
+    struct
+    |> Map.from_struct()
+    |> Enum.map(fn {key, value} ->
+      {key, check_field(value)}
+    end)
+    |> Enum.into(%{})
+    |> struct(GithubSearchApp.UserProfile)
+  end
+
+  defp check_field(nil), do: "Not filled"
+  defp check_field(value), do: value
 end
