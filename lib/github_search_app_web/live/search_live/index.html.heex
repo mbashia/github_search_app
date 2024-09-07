@@ -12,5 +12,49 @@
         <.button phx-disable-with="Saving...">Search</.button>
       </:actions>
     </.simple_form>
+
+    <div>
+      <div class="flex flex-col">
+        name :<%= @user.name %>
+      </div>
+
+      <div class="flex flex-col">
+        joined_at <%= @user.created_at %>
+      </div>
+
+      <div class="flex flex-col">
+        handle :<%= @user.profile_url %>
+      </div>
+
+      <div class="flex flex-col">
+        bio <%= @user.bio %>
+      </div>
+
+      <div class="flex flex-col">
+        Repos :<%= @user.public_repos %>
+      </div>
+
+      <div class="flex flex-col">
+        followers: <%= @user.followers %>
+      </div>
+
+      <div class="flex flex-col">
+        following :<%= @user.following %>
+      </div>
+
+      <div class="flex flex-col">
+        location: <%= @user.location %>
+      </div>
+
+      <div class="flex flex-col">
+        twitter :<%= @user.twitter_username %>
+      </div>
+
+      <div class="flex flex-col">
+        blog: <%= @user.blog %>
+      </div>
+
+      <div class="flex flex-col">origanisation: <%= @user.company %></div>
+    </div>
   </div>
 </div>
