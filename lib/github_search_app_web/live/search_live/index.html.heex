@@ -1,32 +1,36 @@
-<div class=" bg-[#F6F8FF]   h-[100vh] w-[100%] flex md:justify-center md:items-center">
+<div class=" bg-[#F6F8FF] dark:bg-[#141D2F]  h-[100vh] w-[100%] flex md:justify-center md:items-center">
   <div class=" w-[100%] md:w-[45%]  p-4">
     <div class=" flex flex-row  py-6 justify-between">
       <.header>
         <%= @title %>
       </.header>
 
-      <div class="flex flex-row gap-4">
-        <span class="mono-600 tracking-widest text-sm text-[#697C9A]">DARK</span>
+      <div id="theme-toggle" class="flex flex-row gap-4">
+        <span
+          id="theme-label"
+          class="mono-600 tracking-widest text-sm dark:text-[#FFFFFF] text-[#697C9A]"
+        >
+          DARK
+        </span>
 
-        <span class="hover:cursor-pointer hover:text-[#2B3442] ">
+        <span id="theme-icon" class="hover:cursor-pointer hover:text-[#2B3442]">
           <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg ">
             <path
               d="M19.513 11.397a.701.701 0 00-.588.128 7.496 7.496 0 01-2.276 1.336 7.101 7.101 0 01-2.583.462 7.505 7.505 0 01-5.32-2.209 7.568 7.568 0 01-2.199-5.342c0-.873.154-1.72.41-2.49a6.904 6.904 0 011.227-2.21.657.657 0 00-.102-.924.701.701 0 00-.589-.128C5.32.61 3.427 1.92 2.072 3.666A10.158 10.158 0 000 9.83c0 2.8 1.125 5.342 2.967 7.19a10.025 10.025 0 007.16 2.98c2.353 0 4.527-.822 6.266-2.183a10.13 10.13 0 003.58-5.624.623.623 0 00-.46-.796z"
               fill="#697C9A"
               fill-rule="nonzero"
-              class=""
             />
           </svg>
         </span>
       </div>
     </div>
 
-    <div class="hover:cursor-pointer w-[100%] rounded-2xl shadow-2xl mb-8    bg-[white]">
+    <div class="hover:cursor-pointer w-[100%] rounded-2xl shadow-xl mb-8 dark:bg-[#1E2A47]   bg-[white]">
       <.form
         for={@form}
         id="search-form"
         phx-submit="search"
-        class="w-[100%] pl-4 md:pl-8 px-2 py-4 rounded-2xl shadow-2xl  flex items-center gap-2"
+        class="w-[100%] pl-4 md:pl-8 px-2 py-4 rounded-2xl shadow-xl  flex items-center gap-2"
       >
         <div class="w-[5%]">
           <svg height="24" width="25" xmlns="http://www.w3.org/2000/svg">
@@ -36,9 +40,14 @@
             />
           </svg>
         </div>
-        <div class="w-[70%] md:w-[80%]">
-          <.input field={@form[:search]} placeholder="Search GitHub username…" />
+        <div class=" w-[60%] md:w-[65%]">
+          <.input
+            field={@form[:search]}
+            autocomplete="off"
+            placeholder="Search GitHub username…"
+          />
         </div>
+        <div class="w-[15%] md:w-[15%] text-sm text-red-500  mono-700"><%= @error %></div>
         <div class="w-[25%] md:w-[15%]">
           <.button
             phx-disable-with="Searching..."
@@ -50,20 +59,20 @@
       </.form>
     </div>
 
-    <div class="w-[100%] bg-white  shadow-2xl rounded-2xl px-10 py-12 flex flex-col md:flex-row">
+    <div class="w-[100%] bg-white dark:bg-[#1E2A47] shadow-xl rounded-2xl px-10 py-12 flex flex-col md:flex-row">
       <div class="w-[100%] md:w-[25%]  flex gap-8 justify-center py-4">
-        <img src={@user.avatar_url} class="w-24 h-24 rounded-full border border-[#697C9A]/20" />
+        <img src={@user.avatar_url} class="w-28 h-28 rounded-full border border-[#697C9A]/20" />
 
         <div class="md:hidden">
           <div class=" mono-400 flex flex-col gap-2 justify-between">
             <div class="flex flex-col">
-              <span class="text-[#2B3442]  text-xl tracking-widest mono-700">
+              <span class="text-[#2B3442]  dark:text-[#FFFFFF] text-xl tracking-widest mono-700">
                 <%= @user.name %>
               </span>
               <span class="mono-500 text-[#0079FF]">@<%= @user.name %></span>
             </div>
 
-            <span class="mono-500 text-[#697C9A]">
+            <span class="mono-500 dark:text-[#FFFFFF]  text-[#697C9A]">
               Joined <%= format_date(@user.created_at) %>
             </span>
           </div>
@@ -73,35 +82,43 @@
       <div class="w-[100%] md:w-[75%] flex flex-col gap-10">
         <div class=" mono-400 hidden md:flex flex-row justify-between">
           <div class="flex flex-col">
-            <span class="text-[#2B3442]  text-2xl tracking-widest mono-700">
+            <span class="text-[#2B3442] dark:text-[#FFFFFF]  text-2xl tracking-widest mono-700">
               <%= @user.name %>
             </span>
             <span class="mono-500 text-[#0079FF]">@<%= @user.name %></span>
           </div>
 
-          <span class="mono-500 text-[#697C9A]">Joined <%= format_date(@user.created_at) %></span>
+          <span class="mono-500 dark:text-[#FFFFFF] text-[#697C9A]">
+            Joined <%= format_date(@user.created_at) %>
+          </span>
         </div>
 
         <div class="flex flex-col my-2 md:my-4">
-          <p class="text-[#697C9A]  text-sm tracking-widest mono-500">
-            <%= @user.bio %>
+          <p class={"text-base tracking-widest  mono-500 text-[#697C9A] #{if format_bio(@user.bio)=="The Profile has no bio", do: "dark:text-[#697C9A]", else: "dark:text-[#FFFFFF]" } "}>
+            <%= format_bio(@user.bio) %>
           </p>
         </div>
 
-        <div class=" bg-[#F6F8FF] rounded-xl px-6 py-4 flex flex-row justify-evenly">
+        <div class=" bg-[#F6F8FF] dark:bg-[#141D2F] rounded-xl px-6 py-4 flex flex-row justify-evenly">
           <div class="flex flex-col justify-center gap-1">
-            <span class="text-[#4B6A9B] mono-400 text-sm">Repos</span>
-            <span class="text-[#2B3442] mono-700 text-lg"><%= @user.public_repos %></span>
+            <span class="text-[#4B6A9B] dark:text-[#FFFFFF] mono-400 text-sm">Repos</span>
+            <span class="text-[#2B3442] dark:text-[#FFFFFF] mono-700 text-lg">
+              <%= @user.public_repos %>
+            </span>
           </div>
 
           <div class="flex flex-col justify-center gap-1">
-            <span class="text-[#4B6A9B] mono-400 text-sm">Followers</span>
-            <span class="text-[#2B3442] mono-700 text-lg"><%= @user.followers %></span>
+            <span class="text-[#4B6A9B] dark:text-[#FFFFFF] mono-400 text-sm">Followers</span>
+            <span class="text-[#2B3442] dark:text-[#FFFFFF] mono-700 text-lg">
+              <%= @user.followers %>
+            </span>
           </div>
 
           <div class="flex flex-col justify-center gap-1">
-            <span class="text-[#4B6A9B] mono-400 text-sm">Following</span>
-            <span class="text-[#2B3442] mono-700 text-lg"><%= @user.following %></span>
+            <span class="text-[#4B6A9B] dark:text-[#FFFFFF] mono-400 text-sm">Following</span>
+            <span class="text-[#2B3442] dark:text-[#FFFFFF] mono-700 text-lg">
+              <%= @user.following %>
+            </span>
           </div>
         </div>
 
@@ -117,7 +134,9 @@
             </div>
 
             <div>
-              <span class="mono-500 text-[#4B6A9B] "><%= @user.location %></span>
+              <span class={"mono-500 dark:text-[#FFFFFF] #{if format_field(@user.location)== "Not Available", do: "text-[#697C9A]", else: "text-[#4B6A9B]"}"}>
+                <%= format_field(@user.location) %>
+              </span>
             </div>
           </div>
 
@@ -132,7 +151,9 @@
             </div>
 
             <div>
-              <span class="mono-500 text-[#4B6A9B] "><%= @user.twitter_username %></span>
+              <span class={"mono-500 dark:text-[#FFFFFF] #{if format_field(@user.twitter_username)== "Not Available", do: "text-[#697C9A]", else: "text-[#4B6A9B]"}"}>
+                <%= format_field(@user.twitter_username) %>
+              </span>
             </div>
           </div>
 
@@ -146,7 +167,9 @@
             </div>
 
             <div class="hover:cursor-pointer hover:underline">
-              <span class="mono-500 text-[#4B6A9B] "><%= @user.blog %></span>
+              <span class={"mono-500 dark:text-[#FFFFFF] #{if format_field(@user.blog)== "Not Available", do: "text-[#697C9A]", else: "text-[#4B6A9B]"}"}>
+                <%= format_field(@user.blog) %>
+              </span>
             </div>
           </div>
 
@@ -160,7 +183,9 @@
             </div>
 
             <div>
-              <span class="mono-500 text-[#4B6A9B] "><%= @user.company %></span>
+              <span class={"mono-500 dark:text-[#FFFFFF] #{if format_field(@user.company)== "Not Available", do: "text-[#697C9A]", else: "text-[#4B6A9B]"}"}>
+                <%= format_field(@user.company) %>
+              </span>
             </div>
           </div>
         </div>

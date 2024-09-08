@@ -7,16 +7,11 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
     {:ok,
      socket
      |> assign(:user, default_user())
+     |> assign(:error, "")
      |> assign(:title, "devfinder")
      |> assign_new(:form, fn ->
        to_form(%{})
      end)}
-  end
-
-  @impl true
-
-  def handle_event("validate", %{"search" => search}, socket) do
-    {:noreply, socket}
   end
 
   @impl true
@@ -27,7 +22,8 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
       {:ok, searched_user} ->
         {:noreply,
          socket
-         |> assign(:user, process_user_struct(searched_user))}
+         |> assign(:user, searched_user)
+         |> assign(:error, "")}
 
       {:info, info} ->
         {:noreply,
@@ -35,11 +31,11 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
          |> assign(:user, default_user())
          |> assign(:info, info)}
 
-      {:error, error} ->
+      {:error, _error} ->
         {:noreply,
          socket
          |> assign(:user, default_user())
-         |> assign(:error, error)}
+         |> assign(:error, "No results")}
     end
   end
 
@@ -62,16 +58,6 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
     }
   end
 
-  def process_user_struct({:ok, struct}) do
-    struct
-    |> Map.from_struct()
-    |> Enum.map(fn {key, value} ->
-      {key, check_field(value)}
-    end)
-    |> Enum.into(%{})
-    |> struct(GithubSearchApp.UserProfile)
-  end
-
   defp format_date(date) do
     {:ok, utc_time, _int} = DateTime.from_iso8601(date)
 
@@ -80,6 +66,19 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
     |> Timex.format!("{D} {Mshort} {YYYY}")
   end
 
-  defp check_field(nil), do: "Not filled"
-  defp check_field(value), do: value
+  defp format_bio(bio) do
+    bio
+    |> case do
+      nil -> "The Profile has no bio"
+      bio -> bio
+    end
+  end
+
+  defp format_field(field) do
+    field
+    |> case do
+      nil -> "Not Available"
+      field -> field
+    end
+  end
 end

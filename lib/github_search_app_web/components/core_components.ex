@@ -385,8 +385,8 @@ defmodule GithubSearchAppWeb.CoreComponents do
         id={@id || @name}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          " mono-400 block w-full rounded-lg border-zinc-300 py-[7px] px-[11px]",
-          "placeholder:text-[#697C9A] focus:outline-none focus:ring-4 sm:text-sm sm:leading-6",
+          " placeholder:text-sm md:placeholder:text-base caret-[#0079FF] dark:bg-[#1E2A47] dark:text-[#FFFFFF] mono-400 block w-full border-none outline-none focus:ring-0 rounded-lg border-zinc-300 py-[7px] px-[11px]",
+          "placeholder:text-[#697C9A] dark:placeholder:text-[#FFFFFF] focus:outline-none focus:ring-4 sm:text-sm sm:leading-6",
           "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 phx-no-feedback:focus:ring-zinc-800/5",
           "border-zinc-300 focus:border-zinc-400 focus:ring-zinc-800/5",
           @errors != [] && "border-rose-400 focus:border-rose-400 focus:ring-rose-400/10"
@@ -439,7 +439,7 @@ defmodule GithubSearchAppWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center  justify-between gap-6", @class]}>
       <div>
-        <h1 class="text-lg mono-700  text-[#2B3442]  text-3xl leading-8 ">
+        <h1 class="text-lg mono-700  text-[#2B3442] dark:text-[#FFFFFF]  text-3xl leading-8 ">
           <%= render_slot(@inner_block) %>
         </h1>
         <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
