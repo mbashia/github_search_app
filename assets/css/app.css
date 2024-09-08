@@ -1,5 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+@font-face {
+    font-family: "Space Mono";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Space Mono Regular"), local("SpaceMono-Regular"),
+      url(https://fonts.gstatic.com/s/spacemono/v11/i7dPIFZifjKcF5UAWdDRYEF8RQ.woff2) format("woff2");
+  }
+  
+  @font-face {
+    font-family: "Space Mono";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Space Mono Bold"), local("SpaceMono-Bold"),
+      url(https://fonts.gstatic.com/s/spacemono/v11/i7dPIFZifjKcF5UAWdDRYE1-YEw.woff2) format("woff2");
+  }
+  
+  @font-face {
+    font-family: "Space Mono";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Space Mono Italic"), local("SpaceMono-Italic"),
+      url(https://fonts.gstatic.com/s/spacemono/v11/i7dNIFZifjKcF5UAWdDRWB5OTqnSBw.woff2) format("woff2");
+  }
+  
+  @font-face {
+    font-family: "Space Mono";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Space Mono Bold Italic"), local("SpaceMono-BoldItalic"),
+      url(https://fonts.gstatic.com/s/spacemono/v11/i7dNIFZifjKcF5UAWdDRWB5OTqnSBw.woff2) format("woff2");
+  }
+  
+  /* Define classes using the specific font weights */
+  .mono-400 {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+  }
+
+
+  .mono-500 {
+    font-family: "Space Mono", monospace;
+    font-weight: 500;
+  }
+  
+
+  .mono-600 {
+    font-family: "Space Mono", monospace;
+    font-weight: 600;
+  }
+  
+  
+  .mono-700 {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+  }
+  
+  .mono-italic-400 {
+    font-family: "Space Mono", monospace;
+    font-style: italic;
+    font-weight: 400;
+  }
+  
+  .mono-italic-700 {
+    font-family: "Space Mono", monospace;
+    font-style: italic;
+    font-weight: 700;
+  }
+  

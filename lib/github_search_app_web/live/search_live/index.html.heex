@@ -1,60 +1,195 @@
-<div>
-  This is the search page
-  <div>
-    <.header>
-      <%= @title %>
-    </.header>
+<div class=" bg-[#F6F8FF] dark:bg-[#141D2F]  h-[100vh] w-[100%] flex md:justify-center md:items-center">
+  <div class=" w-[100%] md:w-[45%]  p-4">
+    <div class=" flex flex-row  py-6 justify-between">
+      <.header>
+        <%= @title %>
+      </.header>
 
-    <.simple_form for={@form} id="search-form" phx-change="validate" phx-submit="search">
-      <.input field={@form[:search]} type="text" label="" />
+      <div id="theme-toggle" class="flex flex-row gap-4">
+        <span
+          id="theme-label"
+          class="mono-600 tracking-widest text-sm dark:text-[#FFFFFF] text-[#697C9A]"
+        >
+          DARK
+        </span>
 
-      <:actions>
-        <.button phx-disable-with="Searching...">Search</.button>
-      </:actions>
-    </.simple_form>
+        <span id="theme-icon" class="hover:cursor-pointer hover:text-[#2B3442]">
+          <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg ">
+            <path
+              d="M19.513 11.397a.701.701 0 00-.588.128 7.496 7.496 0 01-2.276 1.336 7.101 7.101 0 01-2.583.462 7.505 7.505 0 01-5.32-2.209 7.568 7.568 0 01-2.199-5.342c0-.873.154-1.72.41-2.49a6.904 6.904 0 011.227-2.21.657.657 0 00-.102-.924.701.701 0 00-.589-.128C5.32.61 3.427 1.92 2.072 3.666A10.158 10.158 0 000 9.83c0 2.8 1.125 5.342 2.967 7.19a10.025 10.025 0 007.16 2.98c2.353 0 4.527-.822 6.266-2.183a10.13 10.13 0 003.58-5.624.623.623 0 00-.46-.796z"
+              fill="#697C9A"
+              fill-rule="nonzero"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
 
-    <div>
-      <div class="flex flex-col">
-        name :<%= @user.name %>
+    <div class="hover:cursor-pointer w-[100%] rounded-2xl shadow-xl mb-8 dark:bg-[#1E2A47]   bg-[white]">
+      <.form
+        for={@form}
+        id="search-form"
+        phx-submit="search"
+        class="w-[100%] pl-4 md:pl-8 px-2 py-4 rounded-2xl shadow-xl  flex items-center gap-2"
+      >
+        <div class="w-[5%]">
+          <svg height="24" width="25" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M10.609 0c5.85 0 10.608 4.746 10.608 10.58 0 2.609-.952 5-2.527 6.847l5.112 5.087a.87.87 0 01-1.227 1.233l-5.118-5.093a10.58 10.58 0 01-6.848 2.505C4.759 21.16 0 16.413 0 10.58 0 4.747 4.76 0 10.609 0zm0 1.74c-4.891 0-8.87 3.965-8.87 8.84 0 4.874 3.979 8.84 8.87 8.84a8.855 8.855 0 006.213-2.537l.04-.047a.881.881 0 01.058-.053 8.786 8.786 0 002.558-6.203c0-4.875-3.979-8.84-8.87-8.84z"
+              fill="#0079ff"
+            />
+          </svg>
+        </div>
+        <div class=" w-[60%] md:w-[65%]">
+          <.input
+            field={@form[:search]}
+            autocomplete="off"
+            placeholder="Search GitHub username…"
+          />
+        </div>
+        <div class="w-[15%] md:w-[15%] text-sm text-red-500  mono-700"><%= @error %></div>
+        <div class="w-[25%] md:w-[15%]">
+          <.button
+            phx-disable-with="Searching..."
+            class="hover:cursor-pointer w-[100%] mono-600 text-[#FFFFFF] bg-[#0079FF] hover:bg-[#0079FF]/70 transition ease-in-out duration-300"
+          >
+            Search
+          </.button>
+        </div>
+      </.form>
+    </div>
+
+    <div class="w-[100%] bg-white dark:bg-[#1E2A47] shadow-xl rounded-2xl px-10 py-12 flex flex-col md:flex-row">
+      <div class="w-[100%] md:w-[25%]  flex gap-8 justify-center py-4">
+        <img src={@user.avatar_url} class="w-28 h-28 rounded-full border border-[#697C9A]/20" />
+
+        <div class="md:hidden">
+          <div class=" mono-400 flex flex-col gap-2 justify-between">
+            <div class="flex flex-col">
+              <span class="text-[#2B3442]  dark:text-[#FFFFFF] text-xl tracking-widest mono-700">
+                <%= @user.name %>
+              </span>
+              <span class="mono-500 text-[#0079FF]">@<%= @user.name %></span>
+            </div>
+
+            <span class="mono-500 dark:text-[#FFFFFF]  text-[#697C9A]">
+              Joined <%= format_date(@user.created_at) %>
+            </span>
+          </div>
+        </div>
       </div>
 
-      <div class="flex flex-col">
-        joined_at <%= @user.created_at %>
-      </div>
+      <div class="w-[100%] md:w-[75%] flex flex-col gap-10">
+        <div class=" mono-400 hidden md:flex flex-row justify-between">
+          <div class="flex flex-col">
+            <span class="text-[#2B3442] dark:text-[#FFFFFF]  text-2xl tracking-widest mono-700">
+              <%= @user.name %>
+            </span>
+            <span class="mono-500 text-[#0079FF]">@<%= @user.name %></span>
+          </div>
 
-      <div class="flex flex-col">
-        handle :<%= @user.profile_url %>
-      </div>
+          <span class="mono-500 dark:text-[#FFFFFF] text-[#697C9A]">
+            Joined <%= format_date(@user.created_at) %>
+          </span>
+        </div>
 
-      <div class="flex flex-col">
-        bio <%= @user.bio %>
-      </div>
+        <div class="flex flex-col my-2 md:my-4">
+          <p class={"text-base tracking-widest  mono-500 text-[#697C9A] #{if format_bio(@user.bio)=="The Profile has no bio", do: "dark:text-[#697C9A]", else: "dark:text-[#FFFFFF]" } "}>
+            <%= format_bio(@user.bio) %>
+          </p>
+        </div>
 
-      <div class="flex flex-col">
-        Repos :<%= @user.public_repos %>
-      </div>
+        <div class=" bg-[#F6F8FF] dark:bg-[#141D2F] rounded-xl px-6 py-4 flex flex-row justify-evenly">
+          <div class="flex flex-col justify-center gap-1">
+            <span class="text-[#4B6A9B] dark:text-[#FFFFFF] mono-400 text-sm">Repos</span>
+            <span class="text-[#2B3442] dark:text-[#FFFFFF] mono-700 text-lg">
+              <%= @user.public_repos %>
+            </span>
+          </div>
 
-      <div class="flex flex-col">
-        followers: <%= @user.followers %>
-      </div>
+          <div class="flex flex-col justify-center gap-1">
+            <span class="text-[#4B6A9B] dark:text-[#FFFFFF] mono-400 text-sm">Followers</span>
+            <span class="text-[#2B3442] dark:text-[#FFFFFF] mono-700 text-lg">
+              <%= @user.followers %>
+            </span>
+          </div>
 
-      <div class="flex flex-col">
-        following :<%= @user.following %>
-      </div>
+          <div class="flex flex-col justify-center gap-1">
+            <span class="text-[#4B6A9B] dark:text-[#FFFFFF] mono-400 text-sm">Following</span>
+            <span class="text-[#2B3442] dark:text-[#FFFFFF] mono-700 text-lg">
+              <%= @user.following %>
+            </span>
+          </div>
+        </div>
 
-      <div class="flex flex-col">
-        location: <%= @user.location %>
-      </div>
+        <div class="w-[100%] grid md:grid-cols-2 gap-y-6 gap-x-24  ">
+          <div class="flex gap-4 items-center">
+            <div>
+              <svg height="20" width="14" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12.797 3.425C11.584 1.33 9.427.05 7.03.002a7.483 7.483 0 00-.308 0C4.325.05 2.17 1.33.955 3.425a6.963 6.963 0 00-.09 6.88l4.959 9.077.007.012c.218.38.609.606 1.045.606.437 0 .828-.226 1.046-.606l.007-.012 4.96-9.077a6.963 6.963 0 00-.092-6.88zm-5.92 5.638c-1.552 0-2.813-1.262-2.813-2.813s1.261-2.812 2.812-2.812S9.69 4.699 9.69 6.25 8.427 9.063 6.876 9.063z"
+                  fill="#4b6a9b"
+                />
+              </svg>
+            </div>
 
-      <div class="flex flex-col">
-        twitter :<%= @user.twitter_username %>
-      </div>
+            <div>
+              <span class={"mono-500 dark:text-[#FFFFFF] #{if format_field(@user.location)== "Not Available", do: "text-[#697C9A]", else: "text-[#4B6A9B]"}"}>
+                <%= format_field(@user.location) %>
+              </span>
+            </div>
+          </div>
 
-      <div class="flex flex-col">
-        blog: <%= @user.blog %>
-      </div>
+          <div class="flex gap-4 items-center">
+            <div>
+              <svg height="18" width="20" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20 2.799a8.549 8.549 0 01-2.363.647 4.077 4.077 0 001.804-2.266 8.194 8.194 0 01-2.6.993A4.099 4.099 0 009.75 4.977c0 .324.027.637.095.934-3.409-.166-6.425-1.8-8.452-4.288a4.128 4.128 0 00-.56 2.072c0 1.42.73 2.679 1.82 3.408A4.05 4.05 0 01.8 6.598v.045a4.119 4.119 0 003.285 4.028 4.092 4.092 0 01-1.075.135c-.263 0-.528-.015-.776-.07.531 1.624 2.038 2.818 3.831 2.857A8.239 8.239 0 01.981 15.34 7.68 7.68 0 010 15.285a11.543 11.543 0 006.29 1.84c7.545 0 11.67-6.25 11.67-11.667 0-.182-.006-.357-.015-.53A8.18 8.18 0 0020 2.798z"
+                  fill="#4b6a9b"
+                />
+              </svg>
+            </div>
 
-      <div class="flex flex-col">origanisation: <%= @user.company %></div>
+            <div>
+              <span class={"mono-500 dark:text-[#FFFFFF] #{if format_field(@user.twitter_username)== "Not Available", do: "text-[#697C9A]", else: "text-[#4B6A9B]"}"}>
+                <%= format_field(@user.twitter_username) %>
+              </span>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-center">
+            <div>
+              <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#4b6a9b">
+                  <path d="M7.404 5.012c-2.355 2.437-1.841 6.482.857 8.273.089.06.207.048.283-.027.568-.555 1.049-1.093 1.47-1.776a.213.213 0 00-.084-.3A2.743 2.743 0 018.878 10.1a2.64 2.64 0 01-.223-1.803c.168-.815 1.043-1.573 1.711-2.274l-.004-.002 2.504-2.555a2.568 2.568 0 013.648-.019 2.6 2.6 0 01.037 3.666l-1.517 1.56a.266.266 0 00-.06.273c.35 1.012.435 2.44.201 3.519-.006.03.031.05.053.028l3.228-3.295c2.062-2.105 2.044-5.531-.04-7.615a5.416 5.416 0 00-7.691.04L7.417 4.998l-.013.014z" /><path d="M13.439 13.75a.401.401 0 00.006-.003c.659-1.204.788-2.586.48-3.933l-.002.002-.001-.001a5.434 5.434 0 00-2.19-3.124.3.3 0 00-.333.015c-.553.448-1.095 1.021-1.452 1.754a.243.243 0 00.096.317c.415.24.79.593 1.04 1.061h.001c.196.33.388.958.263 1.632-.116.894-1.019 1.714-1.736 2.453-.546.559-1.935 1.974-2.49 2.542a2.6 2.6 0 01-3.666.037 2.6 2.6 0 01-.038-3.666l1.521-1.564A.266.266 0 005 11.004c-.338-1.036-.43-2.432-.217-3.51.006-.03-.031-.049-.053-.027l-3.179 3.245c-2.083 2.126-2.066 5.588.04 7.693 2.125 2.083 5.57 2.048 7.653-.078.723-.81 3.821-3.678 4.195-4.577z" />
+                </g>
+              </svg>
+            </div>
+
+            <div class="hover:cursor-pointer hover:underline">
+              <span class={"mono-500 dark:text-[#FFFFFF] #{if format_field(@user.blog)== "Not Available", do: "text-[#697C9A]", else: "text-[#4B6A9B]"}"}>
+                <%= format_field(@user.blog) %>
+              </span>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-center">
+            <div>
+              <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#4b6a9b">
+                  <path d="M10.858 1.558L1.7.167A1.477 1.477 0 00.517.492 1.49 1.49 0 000 1.608v17.559c0 .458.375.833.833.833h2.709v-4.375c0-.808.65-1.458 1.458-1.458h2.083c.809 0 1.459.65 1.459 1.458V20h3.541V3a1.46 1.46 0 00-1.225-1.442zM4.583 12.292h-1.25a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm0-2.5h-1.25a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm0-2.5h-1.25a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm0-2.5h-1.25a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm4.167 7.5H7.5a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm0-2.5H7.5a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm0-2.5H7.5a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm0-2.5H7.5a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zM18.85 9.035l-5.933-1.242V20h5.625A1.46 1.46 0 0020 18.542V10.46c0-.688-.47-1.274-1.15-1.425zM16.875 17.5h-1.25a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm0-2.5h-1.25a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25zm0-2.5h-1.25a.625.625 0 010-1.25h1.25a.625.625 0 010 1.25z" />
+                </g>
+              </svg>
+            </div>
+
+            <div>
+              <span class={"mono-500 dark:text-[#FFFFFF] #{if format_field(@user.company)== "Not Available", do: "text-[#697C9A]", else: "text-[#4B6A9B]"}"}>
+                <%= format_field(@user.company) %>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
