@@ -23,11 +23,27 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
   def handle_event("search", %{"search" => search}, socket) do
     IO.inspect(search)
 
-    {:ok, searched_user} = GithubApi.search_github(search)
 
-    {:noreply,
-     socket
-     |> assign(:user, searched_user)}
+    case GithubApi.search_github(search) do
+      {:ok, searched_user} ->
+        {:noreply,
+         socket
+         |> assign(:user, process_user_struct(searched_user))}
+
+      {:info, info} ->
+        {:noreply,
+         socket
+         |> assign(:user, default_user())
+         |> assign(:info, info)}
+
+      {:error, error} ->
+        {:noreply,
+         socket
+         |> assign(:user, default_user())
+         |> assign(:error, error)}
+    end
+
+    
   end
 
   def default_user() do

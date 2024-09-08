@@ -68,6 +68,10 @@ defmodule GithubSearchApp.GithubApi do
       {:ok, %Finch.Response{status: 304}} ->
         {:info, "Not modified"}
 
+      {:ok, %Finch.Response{status: 404, body: body}} ->
+        Jason.decode!(body) |> IO.inspect(label: "body")
+        {:error, "Not found"}
+
       {:ok, %Finch.Response{status: 422}} ->
         {:error, "Validation failed or endpoint has been spammed"}
 
