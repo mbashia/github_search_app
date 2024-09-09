@@ -7,7 +7,7 @@ import Config
 # Run `mix help test` for more information.
 config :github_search_app, GithubSearchApp.Repo,
   username: "root",
-  password: "",
+  password: System.get_env("MYSQL_PASS"),
   hostname: "localhost",
   database: "github_search_app_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
