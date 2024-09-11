@@ -19,7 +19,6 @@ defmodule GithubSearchApp.GithubClientTests do
     public_repos: 8,
     twitter_username: nil,
     profile_url: "https://github.com/octocat"
- 
   }
   def api_client, do: Application.get_env(:github_search_app, :api_client)
 

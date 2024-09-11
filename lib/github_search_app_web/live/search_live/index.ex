@@ -57,7 +57,6 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
       public_repos: 8,
       twitter_username: nil,
       profile_url: "https://github.com/octocat"
-   
     }
   end
 
@@ -78,9 +77,12 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
   end
 
   defp format_field(field) do
+    IO.inspect(field, label: "field before editing")
+
     field
     |> case do
       nil -> "Not Available"
+      "" -> "Not Available"
       field -> field
     end
   end

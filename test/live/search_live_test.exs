@@ -56,7 +56,6 @@ defmodule GithubSearchAppWeb.SearchLiveTest do
       public_repos: 8,
       twitter_username: nil,
       profile_url: "https://github.com/octocat"
-   
     }
   end
 end
