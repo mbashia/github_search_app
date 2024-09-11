@@ -5,20 +5,21 @@ defmodule GithubSearchApp.GithubClientTests do
   setup :verify_on_exit!
 
   @valid_response %GithubSearchApp.UserProfile{
-    avatar_url: "https://avatars.githubusercontent.com/u/96841734?v=4",
-    bio: "SOFTWARE ENGINEER!!",
-    blog: "https://www.mbashia.com",
-    company: "Mbashia Tech",
-    created_at: "2021-12-29T18:54:05Z",
+    avatar_url: "https://avatars.githubusercontent.com/u/583231?v=4",
+    bio: nil,
+    blog: "https://github.blog",
+    company: "@github",
+    created_at: "2011-01-25T18:44:36Z",
     email: nil,
-    followers: 18,
-    following: 47,
-    location: "Nairobi,Kenya",
-    login: "mbashia",
-    name: "mbashia",
-    public_repos: 67,
-    twitter_username: "VMbashia",
-    profile_url: "https://github.com/mbashia"
+    followers: 14878,
+    following: 9,
+    location: "San Francisco",
+    login: "octocat",
+    name: "The Octocat",
+    public_repos: 8,
+    twitter_username: nil,
+    profile_url: "https://github.com/octocat"
+ 
   }
   def api_client, do: Application.get_env(:github_search_app, :api_client)
 
@@ -29,22 +30,22 @@ defmodule GithubSearchApp.GithubClientTests do
   describe "get user search" do
     test "passing valid username returns  existing user" do
       ApiClientBehaviourMock
-      |> expect(:search_github, fn "mbashia" ->
+      |> expect(:search_github, fn "octocat" ->
         {:ok, @valid_response}
       end)
 
       assert {:ok, @valid_response} =
-               search_github("mbashia")
+               search_github("octocat")
     end
 
     test "returns error when user does not exist" do
       ApiClientBehaviourMock
-      |> expect(:search_github, fn "mbashiazzzzzzzzzz" ->
+      |> expect(:search_github, fn "octocatzzzzzzzzzz" ->
         {:error, "Not found"}
       end)
 
       assert {:error, "Not found"} =
-               search_github("mbashiazzzzzzzzzz")
+               search_github("octocatzzzzzzzzzz")
     end
   end
 end
