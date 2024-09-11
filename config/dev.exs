@@ -29,6 +29,8 @@ config :github_search_app, GithubSearchAppWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
+config :github_search_app, api_client: GithubSearchApp.GithubApiClient
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
