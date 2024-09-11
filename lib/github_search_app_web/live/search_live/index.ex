@@ -1,6 +1,6 @@
 defmodule GithubSearchAppWeb.SearchLive.Index do
   use GithubSearchAppWeb, :live_view
-  alias GithubSearchApp.GithubApi
+  # alias GithubSearchApp.GithubApiClient
   @impl true
   def mount(_params, _session, socket) do
     ## djdjdjd
@@ -18,7 +18,7 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
   def handle_event("search", %{"search" => search}, socket) do
     IO.inspect(search)
 
-    case GithubApi.search_github(search) do
+    case IO.inspect(api_client().search_github(search)) do
       {:ok, searched_user} ->
         {:noreply,
          socket
@@ -38,6 +38,8 @@ defmodule GithubSearchAppWeb.SearchLive.Index do
          |> assign(:error, "No results")}
     end
   end
+
+  def api_client, do: Application.get_env(:github_search_app, :api_client)
 
   def default_user() do
     %GithubSearchApp.UserProfile{
