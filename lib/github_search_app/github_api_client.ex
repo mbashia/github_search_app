@@ -4,6 +4,7 @@ defmodule GithubSearchApp.GithubApiClient do
   @moduledoc """
   This module is responsible for interacting with the Github API.
   """
+  require Logger
   @behaviour GithubSearchApp.GithubClientBehaviour
 
   def get_url(search_query) do
@@ -19,22 +20,28 @@ defmodule GithubSearchApp.GithubApiClient do
 
     case response do
       {:ok, %Finch.Response{status: 200, body: body}} ->
+        Logger.info("success")
         {:ok, process_success_results(body)}
 
       {:ok, %Finch.Response{status: 304}} ->
+        Logger.info("info")
         {:info, "Not modified"}
 
       {:ok, %Finch.Response{status: 404, body: body}} ->
+        Logger.warn("Not found")
         Jason.decode!(body) |> IO.inspect(label: "body")
         {:error, "Not found"}
 
       {:ok, %Finch.Response{status: 422}} ->
+        Logger.warn("422")
         {:error, "Validation failed or endpoint has been spammed"}
 
       {:ok, %Finch.Response{status: 503}} ->
+        Logger.warn("503")
         {:error, "Service unavailable - try again later"}
 
       {:error, reason} ->
+        Logger.error("error")
         {:error, reason}
     end
   end
