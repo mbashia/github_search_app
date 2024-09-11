@@ -1,5 +1,5 @@
 <div class=" bg-[#F6F8FF] dark:bg-[#141D2F]  h-[100vh] w-[100%] flex md:justify-center md:items-center">
-  <div class=" w-[100%] md:w-[45%]  p-4">
+  <div class="  w-[100%] md:w-[45%]  p-4">
     <div class=" flex flex-row  py-6 justify-between">
       <.header>
         <%= @title %>
@@ -52,7 +52,7 @@
           <.button
             id="search-button"
             phx-disable-with="Searching..."
-            class="hover:cursor-pointer w-[100%] mono-600 text-[#FFFFFF] bg-[#0079FF] hover:bg-[#0079FF]/70 transition ease-in-out duration-300"
+            class="hover:cursor-pointer w-[100%] mono-600 text-[#FFFFFF] bg-[#0079FF] hover:bg-[#0079FF]/70  dark:hover:bg-[#5f9ffc] transition ease-in-out duration-300"
           >
             Search
           </.button>
@@ -167,7 +167,7 @@
               </svg>
             </div>
 
-            <div class="hover:cursor-pointer hover:underline">
+            <div class="hover:cursor-pointer hover:underline hover:decoration-custom-blue dark:decoration-[#FFFFFF]">
               <span class={"mono-500  #{if format_field(@user.blog)== "Not Available", do: "text-[#697C9A]", else: "dark:text-[#FFFFFF] text-[#4B6A9B]"}"}>
                 <%= format_field(@user.blog) %>
               </span>
