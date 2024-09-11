@@ -22,6 +22,7 @@ config :github_search_app, GithubSearchAppWeb.Endpoint,
 
 # In test we don't send emails.
 config :github_search_app, GithubSearchApp.Mailer, adapter: Swoosh.Adapters.Test
+config :github_search_app, api_client: ApiClientBehaviourMock
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
