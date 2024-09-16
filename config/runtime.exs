@@ -63,6 +63,7 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  config :github_search_app, api_client: GithubSearchApp.GithubApiClient
 
   # ## SSL Support
   #
