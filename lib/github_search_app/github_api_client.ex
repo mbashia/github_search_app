@@ -28,16 +28,16 @@ defmodule GithubSearchApp.GithubApiClient do
         {:info, "Not modified"}
 
       {:ok, %Finch.Response{status: 404, body: body}} ->
-        Logger.warn("Not found")
+        Logger.warning("Not found")
         Jason.decode!(body) |> IO.inspect(label: "body")
         {:error, "Not found"}
 
       {:ok, %Finch.Response{status: 422}} ->
-        Logger.warn("422")
+        Logger.warning("422")
         {:error, "Validation failed or endpoint has been spammed"}
 
       {:ok, %Finch.Response{status: 503}} ->
-        Logger.warn("503")
+        Logger.warning("503")
         {:error, "Service unavailable - try again later"}
 
       {:error, reason} ->
