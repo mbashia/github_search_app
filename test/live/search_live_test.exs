@@ -40,6 +40,19 @@ defmodule GithubSearchAppWeb.SearchLiveTest do
     assert render(live_view) =~ test_user.location
   end
 
+  test "user not found", %{conn: conn} do
+    ApiClientBehaviourMock
+    |> expect(:search_github, fn "octocatzzzzzzzzzz" -> {:error, "Not found"} end)
+
+    {:ok, live_view, _html} = live(conn, ~p"/search")
+
+    live_view
+    |> form("#search-form", %{"search" => "octocatzzzzzzzzzz"})
+    |> render_submit()
+
+    assert render(live_view) =~ "No results"
+  end
+
   def default_user() do
     %GithubSearchApp.UserProfile{
       avatar_url: "https://avatars.githubusercontent.com/u/583231?v=4",
