@@ -18,6 +18,9 @@ module.exports = {
         'custom-blue': '#4b6a9b',
         'custom-blue-dark': '#2B3442',
         'custom-white': '#FFFFFF'
+      },
+      maxWidth: {
+        '3.5xl': '52rem', 
       }
     },
   },
