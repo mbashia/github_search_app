@@ -5,7 +5,7 @@ defmodule GithubSearchAppWeb.SearchLiveTest do
   import Phoenix.LiveViewTest
   import Mox
 
-  describe("Search Form ") do
+  describe("Search Form") do
     test "form renders correctly", %{conn: conn} do
       {:ok, live_view, html} = live(conn, ~p"/search")
 
